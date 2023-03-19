@@ -1,3 +1,24 @@
 @tailwind base; 
 @tailwind components; 
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Post No Bills Jaffna';
+    src: url('/fonts/PostNoBillsJaffna-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Post No Bills Jaffna';
+    src: url('/fonts/PostNoBillsJaffna Bold 700.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Post No Bills Jaffna';
+    src: url('/fonts/PostNoBillsJaffna-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}

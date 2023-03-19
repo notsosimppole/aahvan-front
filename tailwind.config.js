@@ -9,8 +9,15 @@ module.exports = {
         nunito: ['Nunito'],
         poppins: ['Poppins'],
         raleway: ['Raleway'],
+        inter: ['Inter'],
+        'post-no-bills': ['Post No Bills'],
+        'josefin-sans': ['Josefin Sans'],
+        'post-no-bills-jaffna': ['Post No Bills Jaffna'],
       }
     },
+    backgroundImage: {
+      'hero': "url('/static/images/hero.png')",
+    }
   },
   plugins: [],
 }
