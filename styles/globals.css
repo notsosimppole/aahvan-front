@@ -1,5 +1,5 @@
-@tailwind base; 
-@tailwind components; 
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 @font-face {
@@ -21,4 +21,20 @@
     src: url('/fonts/PostNoBillsJaffna-Semibold.ttf') format('truetype');
     font-weight: 600;
     font-style: italic;
+}
+
+@font-face {
+    font-family: "stencil";
+    src: url('../public/fonts/DINNextStencil-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "stencil";
+    src: url('../public/fonts/DINNextStencil-Bold.ttf');
+    font-weight: 700;
+}
+
+.stencil {
+    font-family: 'stencil';
 }
