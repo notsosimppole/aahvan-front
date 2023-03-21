@@ -1,7 +1,7 @@
 
 function About() {
     return (
-        <div className="bg-[#996A16] overflow-hidden">
+        <div className="bg-[#996A16] ">
             <div className="flex flex-col pl-12 pt-12 w-[55vw]">
                 <p className="stencil text-4xl text-[white] pb-8">About</p>
                 <p className="font-inter text-lg pb-20 text-white"> <span className="text-black font-bold">Aahvaan</span> is North India’s largest sports festival conducted by Department of Physical Education & Sports, Delhi Technological University. From 20+ sports events to cultural events and EDM nights Aahvaan has it all.<br></br>
@@ -18,4 +18,4 @@ function About() {
     )
 }
 
-export default About
+export default About    
