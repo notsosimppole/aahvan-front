@@ -1,48 +1,106 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Link from "next/link";
-import { getSession, useSession, signOut } from "next-auth/react"
+import { getSession } from 'next-auth/react'
 
-const UserPage = () => {
 
-  const { data: session } = useSession()
+const User = ({session}) => {
 
-  function handleSignOut(){
-    signOut()
-  }
+    const [form, setForm] = useState({
+        username: session.user.name,
+        email: session.user.email, 
+        file: "",
+        college: ""
+    })
+
+   
+
+    const [name, setName] = useState(session.user.name)
+    const [email, setEmail] = useState(session.user.email)
+    const [file, setFile] = useState("")
+    const [college, setCollege] = useState("")
+
+    async function onSubmit(){
+        // console.log(values)
+        const options = {
+            method: "POST",
+            headers : { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: name,
+                email: email,
+                file: file,
+                college: college,
+            })
+        }
+
+        await fetch('http://localhost:3000/api/auth/signup', options)
+            .then(res => res.json())
+            .then((data) => {
+                if(data) router.push('http://localhost:3000')
+            }).catch((err) => console.log(err))
+
+            // let myUser = await db.collection("users").insertOne(JSON.stringify(values)).then(res => res.json());
+    }
+
+
   return (
-    <section className="container mx-auto text-center">
-                <h3 className="text-4xl font-bold">Profile Page</h3>
+    <div>User
+    <div>
+    <div> {form.username}</div>
+       <div> {form.email}</div>
 
-                <Link href={"/"}>Home Page</Link>
+        <form>
+     
 
-                {session ? User({ session, handleSignOut }) : null}
-        </section>
+        <div>
+            File 
+            <input
+                type="text" value={file}
+                onChange={(e) => setFile(e.target.value)}
+            />
+
+            College 
+            <input
+                type="text" value={college}
+                onChange={(e) => setCollege(e.target.value)}  
+            />
+
+            <button type="submit" onClick={()=> {
+                const options = {
+            method: "POST",
+            headers : { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: name,
+                email: email,
+                file: file,
+                college: college,
+            })
+        }
+
+         fetch('http://localhost:3000/api/auth/signup', options)
+            .then(res => res.json())
+            .then((data) => {
+                if(data) router.push('http://localhost:3000')
+            }).catch((err) => console.log(err))
+            }}>
+                 submit
+            </button>
+        </div>
+            
+        </form>
+    </div>
+    {/* <form >
+      <div>
+        <input
+           
+        />
+      </div>
+    </form> */}
+    </div>
   )
 }
 
-export default UserPage
+export default User
 
-
-function User({ session, handleSignOut }){
-    return(
-      <main className="container mx-auto text-center py-20">
-            <h3 className='text-4xl font-bold'>Authorize User Homepage</h3>
-  
-            <div className='details'>
-              <h5>{session.user.name}</h5>
-              <h5>{session.user.email}</h5>
-            </div>
-  
-            <div className="flex justify-center">
-              <button onClick={handleSignOut} className='mt-5 px-10 py-1 rounded-sm bg-indigo-500 bg-gray-50'>Sign Out</button>
-            </div>
-  
-            <div className='flex justify-center'>
-              <Link href={'/profile'}><a className='mt-5 px-10 py-1 rounded-sm bg-indigo-500 text-gray-50'>Profile Page</a></Link>
-            </div>
-        </main>
-    )
-  }
 
 export async function getServerSideProps({ req }){
     const session = await getSession({ req })
@@ -55,6 +113,8 @@ export async function getServerSideProps({ req }){
             }
         }
     }
+
+
     // authorize user return session
     return {
         props: { session }

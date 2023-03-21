@@ -5,6 +5,7 @@ const userSchema = new Schema({
     email: String,
     password: String,
     file: String,
+    college: String,
 })
 
 const Users = models.user || model('user', userSchema);

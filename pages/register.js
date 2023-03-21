@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { getSession, useSession, signIn, signOut } from "next-auth/react"
 // import clientPromise from "./../lib/mongodb";
 
+
 export default function Register(){
 
     const { data: session } = useSession()
@@ -33,7 +34,35 @@ export default function Register(){
         // Google Handler function
         async function handleGoogleSignin(){
             signIn('google', { callbackUrl : "http://localhost:3000/user"})
-
+            // let myUser = await db.collection("users").insertOne({
+            //     name: `${session.user.name}`,
+            //     email: `${session.user.email}`,
+            //     password: `${session.user.password}`,
+            //     cpassword: `${session.user.cpassword}`,
+            // })
+            const options = {
+                method: "POST",
+                headers : { 'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: formik.username,
+                    email: formik.email,
+                    password: formik.password,
+                    cpassword: formik.cpassword,
+                })
+            }
+    
+            await fetch('http://localhost:3000/api/auth/signup', options)
+                .then(res => res.json())
+                .then((data) => {
+                    if(data) router.push('http://localhost:3000')
+                })
+        }
+     
+     
+    
+    async function onSubmit(values){
+        async function handleGoogleSignin(){
+            signIn('google', { callbackUrl : "http://localhost:3000/user"})
             // let myUser = await db.collection("users").insertOne({
             //     name: `${session.user.name}`,
             //     email: `${session.user.email}`,
@@ -41,8 +70,7 @@ export default function Register(){
             //     cpassword: `${session.user.cpassword}`,
             // })
         }
-
-    async function onSubmit(values){
+        console.log(values)
         const options = {
             method: "POST",
             headers : { 'Content-Type': 'application/json'},
@@ -130,7 +158,9 @@ export default function Register(){
 
                 {/* login buttons */}
                 <div className="input-button">
-                    <button type='submit' className="">
+                    <button 
+                    onClick={onSubmit}
+                    type='submit' className="">
                         Sign Up
                     </button>
                 </div>

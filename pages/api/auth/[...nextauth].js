@@ -41,7 +41,7 @@ export default NextAuth({
             }
         })
     ],
-    secret: "XH6bp/TkLvnUkQiPDEZNyHc0CV+VV5RL/n+HdVHoHN0=",
+    secret: "w4z60sdi7T34vlr49j5Md8iCus8nc42Zv6yTgla7uGw=",
     session: {
         strategy: 'jwt',
     }

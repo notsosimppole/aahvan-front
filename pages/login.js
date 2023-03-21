@@ -94,7 +94,7 @@ export default function Login(){
                         <HiFingerPrint size={25} />
                     </span>
                    
-                </div>Login
+                </div>
 
                 {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
                 {/* login buttons */}
