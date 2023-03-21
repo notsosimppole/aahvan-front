@@ -94,90 +94,110 @@ export default function Register(){
             <title>Register</title>
         </Head>
 
-        <section className='w-3/4 mx-auto flex flex-col gap-10'>
-            <div className="title">
-                <h1 className='text-gray-800 text-4xl font-bold py-4'>Register</h1>
-                <p className='w-3/4 mx-auto text-gray-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, officia?</p>
-            </div>
-
-            {/* form */}
-            <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
-                <div className={` ${formik.errors.username && formik.touched.username ? 'border-rose-600' : ''}`}>
-                    <input 
-                    type="text"
-                    name='Username'
-                    placeholder='Username'
-                    className=""
-                    {...formik.getFieldProps('username')}
-                    />
-                    <span className='icon flex items-center px-4'>
-                        <HiOutlineUser size={25} />
-                    </span>
+        <div className='bg-[#101010] h-screen text-white'>
+            <section className='w-3/4 mx-auto flex flex-col gap-10'>
+                <div className="title flex items-center justify-center flex-col">
+                    <h1 className='text-[#FFB124] text-6xl font-bold pt-12 stencil'>Register</h1>
                 </div>
-                {/* {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{formik.errors.username}</span> : <></>} */}
-                <div className={` ${formik.errors.email && formik.touched.email ? 'border-rose-600' : ''}`}>
-                    <input 
-                    type="email"
-                    name='email'
-                    placeholder='Email'
-                    className=""
-                    {...formik.getFieldProps('email')}
-                    />
-                    <span className='icon flex items-center px-4'>
-                        <HiAtSymbol size={25} />
-                    </span>
-                </div>
-                {/* {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>} */}
-                <div className={` ${formik.errors.password && formik.touched.password ? 'border-rose-600' : ''}`}>
-                    <input 
-                    type={`${show.password ? "text" : "password"}`}
-                    name='password'
-                    placeholder='password'
-                    className=""
-                    {...formik.getFieldProps('password')}
-                    />
-                     <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, password: !show.password})}>
-                        <HiFingerPrint size={25} />
-                    </span>
-                </div>
-                {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
-
-                <div className={` ${formik.errors.cpassword && formik.touched.cpassword ? 'border-rose-600' : ''}`}>
-                    <input 
-                    type={`${show.cpassword ? "text" : "password"}`}
-                    name='cpassword'
-                    placeholder='Confirm Password'
-                    className=""
-                    {...formik.getFieldProps('cpassword')}
-                    />
-                     <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, cpassword: !show.cpassword})}>
-                        <HiFingerPrint size={25} />
-                    </span>
-                </div>
-                {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
-
-                {/* login buttons */}
-                <div className="input-button">
-                    <button 
-                    onClick={onSubmit}
-                    type='submit' className="">
-                        Sign Up
-                    </button>
-                </div>
-
-                <div className="input-button">
-                    <button type='button' onClick={handleGoogleSignin} className="">
-                        Sign In with Google <Image src={'/assets/google.svg'} width="20" height={20} alt="."></Image>
-                    </button>
-                </div>
-
-            </form>
-
-            {/* bottom */}
-            <p className='text-center text-gray-400 '>
-                Have an account? <Link href={'/login'}><a className='text-blue-700'>Sign In</a></Link>
-            </p>
-        </section>
+                {/* form */}
+                <form className='flex flex-col gap-5 w-3/4 mx-auto' onSubmit={formik.handleSubmit}>
+                    <div className={` ${formik.errors.username && formik.touched.username ? 'flex items-center justify-center border-rose-600' : ''}`}>
+                        <span className='icon flex items-center pb-2'>
+                            <p className='text-sm text-gray-400'>
+                                Name
+                            </p>
+                        </span>
+                        <input
+                        type="text"
+                        name='Username'
+                        placeholder='Username'
+                        className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+                        {...formik.getFieldProps('username')}
+                        />
+                        
+                    </div>
+                    {/* {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{formik.errors.username}</span> : <></>} */}
+                    <div className={` ${formik.errors.email && formik.touched.email ? 'border-rose-600' : ''}`}>
+                        <span className='icon flex items-center pb-2'>
+                            <p className='text-sm text-gray-400'>
+                                Email
+                            </p>
+                        </span>
+                        <input
+                        type="email"
+                        name='email'
+                        placeholder='Email'
+                        className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+                        {...formik.getFieldProps('email')}
+                        />
+                    </div>
+                    {/* {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>} */}
+                    <div className={` ${formik.errors.password && formik.touched.password ? 'border-rose-600' : ''}`}>
+                        <span className='icon flex items-center pb-2'>
+                            <p className='text-sm text-gray-400'>
+                                Password
+                            </p>
+                        </span>
+                        <div className='flex'>
+                            <input
+                            type={`${show.password ? "text" : "password"}`}
+                            name='password'
+                            placeholder='password'
+                            className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+                            {...formik.getFieldProps('password')}
+                            />
+                            <span className='icon flex items-center px-4 cursor-pointer' onClick={() => setShow({ ...show, password: !show.password})}>
+                            <HiFingerPrint size={25} />
+                            </span>
+                        </div>
+                    </div>
+                    {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
+                    <div className={` ${formik.errors.cpassword && formik.touched.cpassword ? 'border-rose-600' : ''}`}>
+                        <span className='icon flex items-center pb-2'>
+                            <p className='text-sm text-gray-400'>
+                                Confirm Password
+                            </p>
+                        </span>
+                        <div className='flex'>
+                            <input
+                            type={`${show.cpassword ? "text" : "password"}`}
+                            name='cpassword'
+                            placeholder='Confirm Password'
+                            className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+                            {...formik.getFieldProps('cpassword')}
+                            />
+                             <span className='icon flex items-center px-4 cursor-pointer' onClick={() => setShow({ ...show, cpassword: !show.cpassword})}>
+                                <HiFingerPrint size={25} />
+                            </span>
+                        </div>
+                    </div>
+                    {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
+                    {/* login buttons */}
+                    <div className='flex justify-center gap-8 md:flex-row flex-col'>
+                        <div className="input-button ">
+                            <button
+                            onClick={onSubmit}
+                            type='submit' className="
+                            border-2 border-[#BDA54F] py-2 px-4 rounded-lg hover:border-transparent hover:bg-[#BDA54F] hover:text-[#101010]
+                            ">
+                                Sign Up
+                            </button>
+                        </div>
+                        <div className="input-button">
+                            <button type='button' onClick={handleGoogleSignin} className="
+                            border-2 border-[#BDA54F] py-2 px-4 rounded-lg hover:border-transparent hover:bg-[#BDA54F] hover:text-[#101010] flex items-center justify-center gap-2
+                            ">
+                                Sign In with Google <Image src={'/assets/google.svg'} width="20" height={20} alt="."></Image>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                {/* bottom */}
+                <p className='text-center text-gray-400 '>
+                    Have an account? <Link href={'/login'}><a className='text-blue-700'>Sign In</a></Link>
+                </p>
+            </section>
+        </div>
         </>
     )
 }
