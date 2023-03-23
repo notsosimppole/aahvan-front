@@ -1,9 +1,10 @@
 import React from 'react'
 import {useSession, signIn, signOut} from 'next-auth/react'
 import {useRouter} from 'next/router'
+import { MongoClient } from 'mongodb';
 
-
-const Profile = () => {
+const Profile = ({users}) => {
+    console.log(users)
     const { data: session } = useSession()
     const { push, asPath } = useRouter()
 
@@ -35,3 +36,25 @@ const Profile = () => {
 }
 
 export default Profile
+
+// export async function getStaticProps(context){
+//     const { data: session } = useSession()
+
+//     const client = await MongoClient.connect(`${process.env.MONGODB_URI}`)
+//     const todoCollection = client.db("wtf").collection("users")
+//     const myuser = await todoCollection.findOne({email: session?.user?.email})
+//     client.close()
+//     return {
+//       props:{
+//         users : {
+//             name: myuser.name,
+//             email: myuser.email,
+//             filename: myuser.filename,
+//             college:myuser.college,
+//             image: myuser.image,
+//             id: myuser._id.toString()
+//           }
+//       },
+//       revalidate: 60
+//     }
+//   }
