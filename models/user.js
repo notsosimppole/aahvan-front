@@ -9,4 +9,5 @@ const userschema = mongoose.Schema({
     filename: String,
 })
 
+mongoose.models = {}
 export default mongoose.model("User", userschema)
