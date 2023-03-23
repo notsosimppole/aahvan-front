@@ -31,7 +31,9 @@ const Signin = () => {
 			push('/profile')
 		}, 5000)
 
-		return (<Heading>you are signed in.... wait we are redirecting you to profile page</Heading>)
+		return (<Heading><div className='h-screen flex items-center justify-center bg-[#101010] text-white text-4xl'>
+			You have been signed in! Redirecting you to the profile page...
+		</div></Heading>)
 	}
 
 	const handleOAuthSignIn = (provider) => () => signIn(provider)
@@ -47,19 +49,22 @@ const Signin = () => {
 	return (
 		<Box>
 
-			<VStack>
-				{providers.map(({ name, Icon }) => (
-					<Button
-						key={name}
-						leftIcon={<Icon />}
-						onClick={handleOAuthSignIn(name)}
-						textTransform='uppercase'
-						w='100%'
-					>
-						Sign in with {name}
-					</Button>
-				))}
-			</VStack>
+			<div className='h-screen items-center justify-center flex bg-[#101010] text-white font-inter'>
+				<VStack>
+					{providers.map(({ name, Icon }) => (
+						<Button
+							key={name}
+							leftIcon={<Icon />}
+							onClick={handleOAuthSignIn(name)}
+							textTransform='uppercase'
+							w='100%'
+							className='bg-[#FFB124] border-2 border-[#FFB124] text-black px-4 py-3 rounded-md mt-5 font-inter font-semibold hover:bg-transparent hover:text-[#FFB124] transition duration-200 ease-in-out'
+						>
+							Sign in with {name}
+						</Button>
+					))}
+				</VStack>
+			</div>
 		</Box>
 	)
 }

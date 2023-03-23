@@ -38,43 +38,64 @@ const Profile = ({users}) => {
 	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
   return (
     <>
-    <div>Profile</div>
     {
-        session ? (<>You are logged in {session.user.email}
-         
-
-         <div>
-        <p>Your info : </p>
-        <p>college :  DTU </p>
-        <p>last uploaded file : Something</p>
+        session ? (<div
+        className='w-full h-screen bg-[#101010] text-white flex flex-col items-center font-inter'
+        >
+        <span
+        className='text-2xl pt-4 font-bold text-[#FFB124] pb-10'
+        >Welcome, {session.user.email}</span>
+        <div
+        className='w-10/12 px-10 py-5'
+        >
+          <div
+          className='text-2xl font-bold text-[#FFB124] pb-5 stencil uppercase'
+          >Profile</div>
+          <p>Your info : </p>
+          <p>college :  DTU </p>
+          <p>last uploaded file : Something</p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            College
-          </label>
-          <input
-            type="text"
-            className="bg-slate-300 rounded-md"
-             value={college} onChange={(e)=>setCollege(e.target.value)}
-          />
+        <form onSubmit={handleSubmit} 
+        className='w-10/12 px-10 py-5 bg-[#1F1F1F] rounded-md flex flex-col gap-5'
+        >
+            <label>
+              College
+            </label>
+            <input
+              type="text"
+              className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+              value={college} onChange={(e)=>setCollege(e.target.value)}
+            />
 
-          <label>
-            File
-          </label>
-          <input
-          className="bg-slate-300 rounded-md"
-            type="text" value={file} onChange={(e)=>setFile(e.target.value)}
-          />
+            <label>
+              File
+            </label>
+            <input
+            className="w-full bg-transparent border-2 py-2 px-2 rounded-lg border-[#BDA54F] outline-none"
+              type="text" value={file} onChange={(e)=>setFile(e.target.value)}
+            />
 
-          <button type="submit">
-            Submit
-          </button>
+            <button type="submit" className='bg-[#FFB124] border-2 border-[#FFB124] text-black py-3 rounded-md mt-5 font-inter font-semibold hover:bg-transparent hover:text-[#FFB124] transition duration-200 ease-in-out w-full max-w-[300px] self-center'>
+              Submit
+            </button>
         </form>
-        <button onClick={handleSignOut}>
-            Sign Out
-        </button>
-         </>) : (<> You are not logged in
-        <button onClick={handleSignIn}>Sign In</button>
+        <div className='w-10/12 px-10'>
+          <button onClick={handleSignOut}
+            className='bg-[#FFB124] border-2 border-[#FFB124] text-black py-3 rounded-md mt-5 font-inter font-semibold hover:bg-transparent hover:text-[#FFB124] transition duration-200 ease-in-out w-full max-w-[300px] text-xl'
+          >
+              Sign Out
+          </button>
+        </div>
+         </div>) : (<> 
+         <div className='w-full h-screen bg-black text-white flex flex-col items-center justify-center'>
+             <h1 className='text-6xl font-bold stencil text-[#FFB124] pb-10 uppercase'>Profile</h1>
+              <p
+              className='text-2xl font-thin font-inter'
+              >You are not logged in</p>
+              <button onClick={handleSignIn}
+              className='bg-[#FFB124] border-2 border-[#FFB124] text-black py-3 rounded-md mt-5 font-inter font-semibold hover:bg-transparent hover:text-[#FFB124] transition duration-200 ease-in-out w-full max-w-[300px]'
+              >Sign In</button>
+         </div>
         </>)
     }
 
