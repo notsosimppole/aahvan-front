@@ -1,18 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useSession, signIn, signOut} from 'next-auth/react'
 import {useRouter} from 'next/router'
-import { MongoClient } from 'mongodb';
+
 
 const Profile = ({users}) => {
     console.log(users)
     const { data: session } = useSession()
     const { push, asPath } = useRouter()
 
+    const [college, setCollege] = useState("")
+    const [file, setFile] = useState("")
+ 
 	const handleSignOut = async () => {
 		const data = await signOut({ redirect: false, callbackUrl: '/' })
 
 		push(data.url)
 	}
+    
+    const handleSubmit = () => {
+        console.log("hello for now")
+    }
 
 	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
   return (
@@ -20,8 +27,31 @@ const Profile = ({users}) => {
     <div>Profile</div>
     {
         session ? (<>You are logged in {session.user.email}
+         
 
-        
+         <div>
+        <p>Your info : </p>
+        <p>college :  DTU </p>
+        <p>last uploaded file : Something</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            College
+          </label>
+          <input
+            type="text"
+            className="bg-slate-300 rounded-md"
+             value={college} onChange={(e)=>setCollege(e.target.value)}
+          />
+
+          <label>
+            File
+          </label>
+          <input
+          className="bg-slate-300 rounded-md"
+            type="text" value={file} onChange={(e)=>setFile(e.target.value)}
+          />
+        </form>
         <button onClick={handleSignOut}>
             Sign Out
         </button>
