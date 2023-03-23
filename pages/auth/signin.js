@@ -1,31 +1,17 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import {
-	Box,
+    Box,
 	Button,
-	Grid,
 	Heading,
 	VStack,
-	FormControl,
-	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
-	Input,
-	chakra,
 } from '@chakra-ui/react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
-import { BsGithub, BsTwitter, BsGoogle } from 'react-icons/bs'
+import { BsGoogle } from 'react-icons/bs'
 
 const providers = [
-	{
-		name: 'github',
-		Icon: BsGithub,
-	},
-	{
-		name: 'twitter',
-		Icon: BsTwitter,
-	},
+	
 	{
 		name: 'google',
 		Icon: BsGoogle,
@@ -42,10 +28,10 @@ const Signin = () => {
 
 	if (session) {
 		setTimeout(() => {
-			push('/')
+			push('/profile')
 		}, 5000)
 
-		return <Heading>you are already signed in</Heading>
+		return (<Heading>you are signed in.... wait we are redirecting you to profile page</Heading>)
 	}
 
 	const handleOAuthSignIn = (provider) => () => signIn(provider)
@@ -60,18 +46,6 @@ const Signin = () => {
 
 	return (
 		<Box>
-			<chakra.form onSubmit={handleSubmit}>
-				<FormLabel>Email Address</FormLabel>
-				<Input
-					value={email}
-					type='email'
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-
-				<Button type='submit' w='100%' my={5}>
-					Login
-				</Button>
-			</chakra.form>
 
 			<VStack>
 				{providers.map(({ name, Icon }) => (
