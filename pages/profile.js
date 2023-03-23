@@ -17,8 +17,22 @@ const Profile = ({users}) => {
 		push(data.url)
 	}
     
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("hello for now")
+
+        let data = await fetch("http://localhost:3000/api/user", {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: session.user.email,
+                college: college, 
+                filename: file
+            })
+        })
+
+
     }
 
 	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
@@ -51,6 +65,10 @@ const Profile = ({users}) => {
           className="bg-slate-300 rounded-md"
             type="text" value={file} onChange={(e)=>setFile(e.target.value)}
           />
+
+          <button type="submit">
+            Submit
+          </button>
         </form>
         <button onClick={handleSignOut}>
             Sign Out

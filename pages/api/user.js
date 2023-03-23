@@ -36,6 +36,8 @@ async function handler(req, resp){
 } else if (req.method === "GET"){
     const {name, image, email, college, filename} = req.body
 
+    
+
     const client = await MongoClient.connect(`${process.env.MONGODB_URI}`)
     const db = client.db("wtf")
     const collection = db.collection("users")
@@ -43,23 +45,32 @@ async function handler(req, resp){
     const result = await collection.find().toArray()
     client.close()
     return resp.status(200).json({result})
+
+
 } else if(req.method === 'PUT') {
-    const {name, image, email, college, filename} = req.body
+    const {_id, name, image, email, college, filename} = req.body
+
+    console.log(req.body)
 
     const client = await MongoClient.connect(`${process.env.MONGODB_URI}`)
     const db = client.db("wtf")
     const collection = db.collection("users")
 
-    const result = await collection.replaceOne(
+    const result = await collection.updateOne(
         {email: email}, 
         {
-         $set: {
-                filename: filename,
-                college: college
-         }
-        }
-        
+            $set: {
+                   filename: filename,
+                   college: college
+            }
+            
+           }
+           ,{multi: true}
     )
+console.log(email)
+console.log(college + " " + filename)
+   
+    console.log(result)
     return resp.status(200).json({result})
 } 
 else {
