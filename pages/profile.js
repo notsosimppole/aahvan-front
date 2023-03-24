@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 
 
 const Profile = ({users}) => {
-    console.log(users)
+    // console.log(users)
     const { data: session } = useSession()
     const { push, asPath } = useRouter()
 
@@ -20,7 +20,7 @@ const Profile = ({users}) => {
 	}
     
     const handleSubmit = async () => {
-        console.log("hello for now")
+        // console.log("hello for now")
 
         let data = await fetch("http://localhost:3000/api/user", {
             method: 'PUT',
@@ -63,7 +63,7 @@ const Profile = ({users}) => {
 
     // const userData = myuserdata.filter((user) => user.email === session?.user?.email)[0]
 
-    console.log(myuserdata.filter((user) => user.email === session?.user?.email)[0])
+    // console.log(myuserdata.filter((user) => user.email === session?.user?.email)[0])
 
 	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
   return (

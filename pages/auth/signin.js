@@ -23,7 +23,7 @@ const Signin = () => {
 	const { push } = useRouter()
 	const [email, setEmail] = useState('')
 
-	console.log(session)
+	// console.log(session)
 	if (status === 'loading') return <Heading>Checking Authentication...</Heading>
 
 	if (session) {
