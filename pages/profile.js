@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSession, signIn, signOut} from 'next-auth/react'
 import {useRouter} from 'next/router'
 
@@ -10,6 +10,8 @@ const Profile = ({users}) => {
 
     const [college, setCollege] = useState("")
     const [file, setFile] = useState("")
+
+    const [myuserdata, setMyuserData] = useState([])
  
 	const handleSignOut = async () => {
 		const data = await signOut({ redirect: false, callbackUrl: '/' })
@@ -35,6 +37,34 @@ const Profile = ({users}) => {
 
     }
 
+    const fetchUser = async () => {
+      // setLoading(true);
+  
+      try {
+        const response = await fetch('http://localhost:3000/api/user', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        
+          const result = await response.json();
+          setMyuserData(result.result);
+       
+      } catch (err) {
+        alert(err);
+      } 
+    };
+  
+    useEffect(() => {
+      fetchUser();
+    }, []);
+
+    // const userData = myuserdata.filter((user) => user.email === session?.user?.email)[0]
+
+    console.log(myuserdata.filter((user) => user.email === session?.user?.email)[0])
+
 	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
   return (
     <>
@@ -52,8 +82,11 @@ const Profile = ({users}) => {
           className='text-2xl font-bold text-[#FFB124] pb-5 stencil uppercase'
           >Profile</div>
           <p>Your info : </p>
-          <p>college :  DTU </p>
-          <p>last uploaded file : Something</p>
+         
+          <p>college : {myuserdata.filter((user) => user.email === session?.user?.email)[0].college} </p>
+          <p>last uploaded file : {myuserdata.filter((user) => user.email === session?.user?.email)[0].filename}</p>
+         
+        
         </div>
         <form onSubmit={handleSubmit} 
         className='w-10/12 px-10 py-5 bg-[#1F1F1F] rounded-md flex flex-col gap-5'
