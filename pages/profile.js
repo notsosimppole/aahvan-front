@@ -44,7 +44,7 @@ const Profile = ({users}) => {
         >
         <span
         className='text-2xl pt-4 font-bold text-[#FFB124] pb-10'
-        >Welcome, {session.user.email}</span>
+        >Welcome, {session.user.name}</span>
         <div
         className='w-10/12 px-10 py-5'
         >
